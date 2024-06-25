@@ -1,0 +1,32 @@
+﻿@page "/events"
+@attribute [StreamRendering(true)]
+@inject IEventsService EventsService
+
+<h3>Events List</h3>
+
+@if (events == null)
+{
+    <span>Loading...</span>
+}
+else if(events.Count == 0) 
+{
+    <span>There are no events found</span>
+}
+else
+{
+    <ul>
+        @foreach (var e in events)
+        {
+            <li>@e.Event1</li>
+        }
+    </ul>
+}
+
+@code {
+    List<Event> events = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        events = await EventsService.GetAllEvents();
+    }
+}
