@@ -15,6 +15,7 @@ builder.Services.AddDbContext<EventHubussyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IEventsService, EventsService>();
+builder.Services.AddScoped<ITicketsService, TicketsService>();
 
 var app = builder.Build();
 

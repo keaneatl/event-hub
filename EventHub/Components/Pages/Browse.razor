@@ -1,7 +1,7 @@
 ﻿@page "/browse"
 @attribute [StreamRendering(true)]
+@inject NavigationManager Navigation
 @inject IEventsService EventsService
-
 <PageTitle>Browse Events</PageTitle>
 <br />
 <br />
@@ -33,7 +33,7 @@ else
                     <div class="card-body">
                         <h5 class="card-title">@e.Event1 (@e.StartDate - @e.EndDate)</h5>
                         <p class="card-text">@e.Description</p>
-                        <a href="gettickets" class="btn btn-primary">Get Tickets</a>
+                    <a href="/purchase/{@e.EventId}" class="btn btn-primary">Get Tickets</a>
                     </div>
                 </div>
         }

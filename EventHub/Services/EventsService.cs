@@ -16,5 +16,14 @@ namespace EventHub.Services
             var events = await _context.Events.ToListAsync();
             return events;
         }
+
+        public async Task<Event> GetEvent(string id)
+        {
+            int eventId = int.Parse(id.Trim('{').Trim('}'));
+            
+            var e = await _context.Events.FindAsync(eventId);
+
+            return e;
+        }
     }
 }

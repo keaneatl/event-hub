@@ -13,6 +13,8 @@ public partial class Ticket
 
     public int EventId { get; set; }
 
+    public int Stock { get; set; }
+
     public virtual Event Event { get; set; } = null!;
 
     public virtual ICollection<UserTicket> UserTickets { get; set; } = new List<UserTicket>();
