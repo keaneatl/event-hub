@@ -16,7 +16,6 @@ builder.Services.AddDbContext<EventHubussyContext>(options =>
 
 builder.Services.AddScoped<IEventsService, EventsService>();
 builder.Services.AddScoped<ITicketsService, TicketsService>();
-builder.Services.AddScoped<IEventTypesService, EventTypesService>();
 
 var app = builder.Build();
 
