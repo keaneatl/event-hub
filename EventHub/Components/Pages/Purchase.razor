@@ -2,6 +2,7 @@
 @attribute [StreamRendering(true)]
 @inject IEventsService EventsService
 @inject ITicketsService TicketsService
+@inject IEventTypesService EventTypesService
 
 <PageTitle>Purchase Tickets</PageTitle>
 <br />
@@ -22,12 +23,12 @@ else
                 <div class="card">
                     <img src="assets/img2.png" class="card-img-top" alt="Image">
                     <div class="card-body">
-                        <p><strong>Event Type:</strong>Test Event Type</p>
-                        <p class="card-text"><strong>Event Location:</strong>@e.Location</p>
-                        <p class="card-text"><strong>Event Description:</strong>@e.Description</p>
+                        <p><strong>Event Type:</strong> @eventType.EventType1</p>
+                        <p class="card-text"><strong>Event Location: </strong >@e.Location</p>
+                        <p class="card-text"><strong>Event Description:</strong> @e.Description</p>
                         @* <p class="card-text"><strong>Event Price:</strong>₱@e.Price</p> *@
-                        <p class="card-text"><strong>Event Start Date:</strong>@e.StartDate</p>
-                        <p class="card-text"><strong>Event End Date:</strong>@e.EndDate</p>
+                        <p class="card-text"><strong>Event Start Date:</strong> @e.StartDate</p>
+                        <p class="card-text"><strong>Event End Date:</strong> @e.EndDate</p>
 
                         <br />
                         <div class="form-group">
@@ -62,7 +63,7 @@ else
                         </div>
 
                         <div class="text-center m-3">
-                            <a href="#" class="btn btn-primary">Buy Tickets</a>
+                            <button type="submit" class="btn btn-primary">Buy Tickets</button>
                         </div>
                     </div>
                 </div>
@@ -76,6 +77,8 @@ else
     public string EventID { get; set; }
 
     List<Ticket> eventTickets = null;
+    List<EventType> eventTypes = null;
+    EventType eventType = null;
     Event e = null;
 
 
@@ -83,5 +86,8 @@ else
     {
         e = await EventsService.GetEvent(EventID);
         eventTickets = await TicketsService.GetEventTickets(EventID);
+        eventTypes = await EventTypesService.GetAllEventTypes();
+
+        eventType = eventTypes.Find(eventType => eventType.EventTypeId == e.EventTypeId);
     }
 }
